@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Services\API\BookService;
-use Illuminate\Http\JsonResponse;
+use App\Services\BookService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use Illuminate\Http\JsonResponse;
 
 class BookController extends Controller
 {

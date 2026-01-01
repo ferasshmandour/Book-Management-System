@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\API;
+namespace App\Services;
 
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
