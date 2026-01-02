@@ -26,8 +26,8 @@ class UpdateBookRequest extends FormRequest
             'author' => ['required', 'string'],
             'published_year' => ['required', 'integer', 'between:1900,2100'],
             'is_available' => ['sometimes', 'boolean'],
-            'cover_color'=> ['nullable','string'],
-            'cover_format'=> ['nullable','string'],
+            'cover_color' => ['nullable', 'string'],
+            'cover_format' => ['nullable', 'string'],
         ];
     }
 
