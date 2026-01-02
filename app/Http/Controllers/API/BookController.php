@@ -19,39 +19,31 @@ class BookController extends Controller
 
     public function index(): JsonResponse
     {
-        return response()->json([
-            'data' => $this->bookService->getBooks(),
-        ], 200);
+        $books = $this->bookService->getBooks();
+        return $this->successResponse($books);
     }
 
     public function show(int $id): JsonResponse
     {
-        return response()->json([
-            'data' => $this->bookService->getBook($id),
-        ], 200);
+        $book = $this->bookService->getBook($id);
+        return $this->successResponse($book);
     }
 
     public function store(StoreBookRequest $request): JsonResponse
     {
         $this->bookService->createBook($request);
-        return response()->json([
-            'message' => 'Book created successfully'
-        ], 201);
+        return $this->successResponse(null, "Book created successfully", 201);
     }
 
     public function update(UpdateBookRequest $request, int $id): JsonResponse
     {
         $this->bookService->updateBook($request, $id);
-        return response()->json([
-            'message' => 'Book updated successfully'
-        ], 200);
+        return $this->successResponse(null, "Book updated successfully");
     }
 
     public function destroy($id): JsonResponse
     {
         $this->bookService->deleteBook($id);
-        return response()->json([
-            'message' => 'Book deleted successfully'
-        ], 200);
+        return $this->successResponse(null, "Book deleted successfully");
     }
 }
