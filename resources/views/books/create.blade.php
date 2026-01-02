@@ -80,6 +80,32 @@
                                 </label>
                             </div>
 
+                            <div class="mb-3">
+                                <label for="cover_color" class="form-label fw-semibold">Cover Color</label>
+                                <input type="text" class="form-control @error('cover_color') is-invalid @enderror"
+                                    id="cover_color" name="cover_color" value="{{ old('cover_color') }}"
+                                    placeholder="Enter author name">
+                            </div>
+
+                            @error('cover_color')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+
+                            <div class="mb-3">
+                                <label for="cover_format" class="form-label fw-semibold">Cover Format</label>
+                                <input type="text" class="form-control @error('cover_format') is-invalid @enderror"
+                                    id="cover_format" name="cover_format" value="{{ old('cover_format') }}"
+                                    placeholder="Enter author name">
+                            </div>
+
+                            @error('cover_format')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+
                             <div class="d-flex justify-content-end gap-2">
                                 <a href="{{ route('book.list') }}" class="btn btn-light">
                                     Cancel
