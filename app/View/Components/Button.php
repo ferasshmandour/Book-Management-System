@@ -11,12 +11,14 @@ class Button extends Component
     public $type;
     public $class;
     public $href;
+    public $needConfirm;
 
-    public function __construct($type = 'button', $class = 'btn btn-primary', $href = null)
+    public function __construct($type = 'button', $class = 'btn btn-primary', $href = null,  $needConfirm = false)
     {
         $this->type = $type;
         $this->class = $class;
         $this->href = $href;
+        $this->needConfirm = $needConfirm;
     }
 
     /**

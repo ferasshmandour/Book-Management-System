@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Create New Book
+@endsection
+
 @section('content')
     <div class="container">
         <h1>Create New Book</h1>

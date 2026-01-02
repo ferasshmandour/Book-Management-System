@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Book List
+@endsection
+
 @section('content')
     <div class="container">
         <h1 class="text-center mt-5">Book List</h1>
@@ -33,12 +37,12 @@
                         <td>{{ $book->created_at }}</td>
                         <td>{{ $book->updated_at }}</td>
                         <td>
-                            <a href="{{ route('book.edit', $book->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <x-button class="btn btn-warning btn-sm"
+                                href="{{ route('book.edit', $book->id) }}">Edit</x-button>
                             <form action="{{ route('book.delete', $book->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Are you sure?')">Delete</button>
+                                <x-button type="submit" class="btn btn-danger btn-sm" needConfirm=true>Delete</x-button>
                             </form>
                         </td>
                     </tr>
