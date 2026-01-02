@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Services\BookService;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class BookController extends Controller
@@ -38,8 +37,12 @@ class BookController extends Controller
 
     public function store(StoreBookRequest $request)
     {
-        $this->bookService->createBook($request);
-        return redirect()->route("book.list")->with("success", "Book created successfully");
+        try {
+            $this->bookService->createBook($request);
+            return redirect()->route("book.list")->with("success", "Book created successfully");
+        } catch (\Exception $e) {
+            return back()->withInput()->with("error", "Error when create book");
+        }
     }
 
     public function edit(int $id): View
@@ -50,13 +53,21 @@ class BookController extends Controller
 
     public function update(UpdateBookRequest $request, int $id)
     {
-        $this->bookService->updateBook($request, $id);
-        return redirect()->route("book.list")->with("success", "Book updated successfully");
+        try {
+            $this->bookService->updateBook($request, $id);
+            return redirect()->route("book.list")->with("success", "Book updated successfully");
+        } catch (\Exception $e) {
+            return back()->withInput()->with("error", "Error when update book");
+        }
     }
 
     public function destroy(int $id)
     {
-        $this->bookService->deleteBook($id);
-        return redirect()->back()->with("success", "Book deleted successfully");
+        try {
+            $this->bookService->deleteBook($id);
+            return redirect()->back()->with("success", "Book deleted successfully");
+        } catch (\Exception $e) {
+            return back()->withInput()->with("error", "Error when delete book");
+        }
     }
 }
