@@ -1,53 +1,81 @@
 @extends('layouts.app')
 
-@section('title')
-    Book List
-@endsection
+@section('title', 'Book List')
 
 @section('content')
-    <div class="container">
-        <h1 class="text-center mt-5">Book List</h1>
-        <table class="table m-5">
-            <thead>
-                <tr>
-                    <td>#</td>
-                    <td>Title</td>
-                    <td>Author</td>
-                    <td>Published Year</td>
-                    <td>Is Available</td>
-                    <td>Created Date</td>
-                    <td>Updated Date</td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($books as $book)
-                    <tr>
-                        <td>{{ $book->id }}</td>
-                        <td>{{ $book->title }}</td>
-                        <td>{{ $book->author }}</td>
-                        <td>{{ $book->published_year }}</td>
-                        <td>
-                            @if ($book->is_available)
-                                Yes
-                            @else
-                                No
-                            @endif
-                        </td>
-                        <td>{{ $book->created_at }}</td>
-                        <td>{{ $book->updated_at }}</td>
-                        <td>
-                            <x-button class="btn btn-warning btn-sm"
-                                href="{{ route('book.edit', $book->id) }}">Edit</x-button>
-                            <form action="{{ route('book.delete', $book->id) }}" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <x-button type="submit" class="btn btn-danger btn-sm" needConfirm=true>Delete</x-button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="container-fluid">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0 fw-bold">📚 Book List</h2>
+
+            <a href="{{ route('book.create') }}" class="btn btn-primary btn-sm">
+                + Add Book
+            </a>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-0">
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped align-middle mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Published</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Updated</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @forelse ($books as $book)
+                                <tr>
+                                    <td class="fw-semibold">{{ $book->id }}</td>
+                                    <td>{{ $book->title }}</td>
+                                    <td>{{ $book->author }}</td>
+                                    <td>{{ $book->published_year }}</td>
+                                    <td>
+                                        @if ($book->is_available)
+                                            <span class="badge bg-success">Available</span>
+                                        @else
+                                            <span class="badge bg-danger">Not Available</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-muted">{{ $book->created_at->format('Y-m-d') }}</td>
+                                    <td class="text-muted">{{ $book->updated_at->format('Y-m-d') }}</td>
+                                    <td class="text-end">
+
+                                        <a href="{{ route('book.edit', $book->id) }}"
+                                            class="btn btn-outline-warning btn-sm">
+                                            Edit
+                                        </a>
+
+                                        <form action="{{ route('book.delete', $book->id) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-button type="submit" class="btn btn-outline-danger btn-sm"
+                                                needConfirm=true>Delete</x-button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center py-4 text-muted">
+                                        No books found 📭
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
     </div>
 @endsection

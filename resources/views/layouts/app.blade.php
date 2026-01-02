@@ -27,14 +27,12 @@
     <div class="container-fluid flex-grow-1">
         <div class="row h-100">
 
-            <!-- Sidebar -->
             <aside class="col-md-3 col-lg-2 bg-dark text-light p-3">
                 <div class="position-sticky top-0">
                     @include('partials.sidebar')
                 </div>
             </aside>
 
-            <!-- Main Content -->
             <div class="col-md-9 col-lg-10 p-4">
                 <main class="bg-white rounded-4 shadow-sm p-4">
                     @yield('content')
